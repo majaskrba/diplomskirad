@@ -1,0 +1,30 @@
+﻿@model IEnumerable<diplomskirad.Models.Informacija>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<style>
+    #slika {
+        width:15px;
+        height:15px;
+    }
+</style>
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create1">Create New</a>
+</p>
+<div class="container d-flex flex-wrap">
+    @foreach (var item in Model)
+    {
+    <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="https://loremflickr.com/g/320/240/paris=@item.InformacijaID?lock=@item.InformacijaID" alt="@item.Naslov">
+        <div class="card-body">
+            <h5 class="card-title">@item.Naslov</h5>
+            <p class="card-text">@item.Opis</p>
+            <p class="card-text">@item.DatumDogadjaja</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+    </div>
+    }
+</div>
