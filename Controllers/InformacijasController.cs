@@ -87,7 +87,7 @@ namespace diplomskirad.Controllers
                 DatumDogadjaja = model.DatumDogadjaja,
                 Od=model.Od,
                 Do=model.Do,
-                DatumIVrijemeObjave=model.DatumIVrijemeObjave,
+                DatumIVrijemeObjave=DateTime.Now,
                 Autor = model.Autor,
                 Slika = stringFileName
             };

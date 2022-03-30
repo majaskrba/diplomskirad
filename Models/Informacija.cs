@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,7 +18,7 @@ namespace diplomskirad.Models
         public string Opis { get; set; }
         [Required]
         [DataType(DataType.Date)]
-        [Display(Name ="Datum dogadjaja")]
+        [DisplayName("Datum dogadjaja")]
         public DateTime DatumDogadjaja { get; set; }
         [Required]
         [DataType(DataType.Time)]
