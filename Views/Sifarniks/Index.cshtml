@@ -1,0 +1,54 @@
+﻿@model IEnumerable<diplomskirad.Models.Sifarnik>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Kreiraj</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Naziv)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Min)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Max)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Jedinica)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Naziv)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Min)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Max)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Jedinica)
+            </td>
+            <td>
+                <a asp-action="Edit"  style="font-family:cursive" asp-route-id="@item.SifarnikID">Izmijeni</a> |
+                <a asp-action="Details"  style="font-family:cursive" asp-route-id="@item.SifarnikID">Detalji</a> |
+                <a asp-action="Delete"  style="font-family:cursive" asp-route-id="@item.SifarnikID">Obrisi</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

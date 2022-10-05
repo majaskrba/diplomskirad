@@ -1,0 +1,70 @@
+﻿@model IEnumerable<diplomskirad.Models.Rezervacija>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div style="font-size:40px;text-align:center">Spisak rezervacija</div>
+
+<table  class="table table-hover table-striped">
+    <thead>
+        <tr>
+            <th>
+                Ime i prezime
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BrojTelefona)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Datum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vrijeme)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TipAnalize)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Laboratorija)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Autor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BrojTelefona)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Datum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vrijeme)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipAnalize.Naziv)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Laboratorija.Lokacija)
+            </td>
+            <td>
+                <a asp-action="Edit" style="font-family:cursive" asp-route-id="@item.RezervacijaID">Izmijeni</a> |
+                <a asp-action="Details" style="font-family:cursive" asp-route-id="@item.RezervacijaID">Detalji</a> |
+                <a asp-action="Delete" style="font-family:cursive" asp-route-id="@item.RezervacijaID">Obrisi</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

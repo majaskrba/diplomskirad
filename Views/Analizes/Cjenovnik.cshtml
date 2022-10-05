@@ -1,0 +1,67 @@
+﻿@model IEnumerable<diplomskirad.Models.Analize>
+
+<style>
+</style>
+<p style="font-size: 35px; font-family: cursive">Cjenovnik</p>
+
+@if (!ViewData.ModelState.IsValid && ViewData.ModelState["Error"].Errors.Count > 0)
+{
+    <div class="alert alert-danger" role="alert" style="margin-top:4rem;">
+        Nije pronadjena analiza koju ste pretrazili!
+    </div>
+    <script>
+    window.setTimeout(function () {
+        $(".alert").fadeTo(500, 0).slideUp(1000, function () {
+            $(this).remove();
+        });
+    }, 2000);
+    </script>
+
+}
+
+<form asp-controller="Analizes" asp-action="Pretraga">
+    <p style="font-family: cursive">
+        Naziv:<input type="text" class="form-control" name="SearchString" placeholder="Unesi naziv analize" />
+        <input type="submit" class="btn btn-primary" style="font-family:cursive" value="Pretrazi" />
+    </p>
+</form>
+<table class="table table-hover table-striped" style="width:100%">
+    <thead>
+        <tr>
+
+            <th>
+                Naziv analize
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cijena)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr style="width:100%">
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Naziv)
+            </td>
+
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Cijena)
+            </td>
+          
+            <td>
+                @if (User.IsInRole("Laborant") || User.IsInRole("Administrator"))
+                {
+                    <a asp-action="Edit" asp-route-id="@item.AnalizeID" style="font-family: cursive">Izmijeni</a>
+                }
+                </td>
+           
+        </tr>
+          
+}
+    </tbody>
+</table>

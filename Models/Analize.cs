@@ -8,14 +8,21 @@ namespace diplomskirad.Models
 {
     public class Analize
     {
+
         [Required]
         [Key]
         public int AnalizeID { get; set; }
         [Required]
-        public String Naziv { get; set; }
+        public string Naziv { get; set; }
         [Required]
-        public String Opis { get; set; }
+        public string Opis { get; set; }
         [Required]
-        public String Slika { get; set; }
+        public string Slika { get; set; }
+        [Required]
+        [DataType(DataType.Currency)]//tip floata,neka novcana vrijednost ,uzima na kojoj mi je sistem ,
+        public float Cijena { get; set; }
+
+        public TipAnalize TipAnalize { get; set; }
+        public int TipAnalizeID { get; set; }
     }
 }

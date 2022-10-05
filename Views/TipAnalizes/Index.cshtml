@@ -1,0 +1,39 @@
+﻿@model IEnumerable<diplomskirad.Models.TipAnalize>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<tbody>
+    @foreach (var item in Model)
+    {
+       
+            <tr>
+                <td>
+                    <h1 style="text-align:center"> @item.Naziv</h1>
+                </td>
+                <td>
+                    <p>@item.Slika</p>
+                </td>
+                <td>
+                   <p>@item.Opis</p>
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+                    <a asp-action="Create"  style="font-family:cursive">Kreiraj</a>
+
+                    <a asp-action="Edit"  style="font-family: cursive" asp-route-id="@item.TipAnalizeID">Izmijeni</a> 
+                    <a asp-action="Details" asp-route-id="@item.TipAnalizeID"  style="font-family: cursive">Detalji</a> 
+                    <a asp-action="Delete" asp-route-id="@item.TipAnalizeID"  style="font-family: cursive">Obrisi</a>
+                </td>
+            </tr>
+        
+    }
+</tbody>
+

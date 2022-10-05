@@ -1,0 +1,107 @@
+﻿@model diplomskirad.Models.Rezervacija
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+
+
+   @* .div-wrapper {
+        height: 200px;
+        margin-top: 40px;
+        border: 2px dashed #ddd;
+        border-radius: 8px;
+    }
+
+    .div-to-align {
+        width: 75%;
+        padding: 40px 20px;
+        /* .... */
+    }*@
+</style>
+<h1 style="text-align:center;font-size:40px">Zakazi svoj termin</h1>
+
+@if (ViewBag.poruka != null)
+{
+   
+<div class="container h-100">
+    <div class="row h-100 justify-content-center align-items-center">
+        <div class="alert alert-success" role="alert" style="text-align:center;width:50%;font-family:cursive">
+            <strong>USPJESNO!</strong> USPJESNO STE REZERVISALI SVOJ TERMIN!
+        </div>
+    </div>
+    </div>
+    <script>
+        window.setTimeout(function () {
+            $(".alert").fadeTo(500, 0).slideUp(1000, function () {
+                $(this).remove();
+            });
+        }, 2000);
+    </script>
+
+
+    }
+
+    <div class="container h-100">
+        <div class="row h-100 justify-content-center align-items-center">
+            <div class="col-10 col-md-8 col-lg-6" style="background-color:pink">
+                <form asp-action="Create" asp-controller="Rezervacijas">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Autor" class="control-label">Ime i prezime:</label>
+                        <input asp-for="Autor" class="form-control" />
+                        <span asp-validation-for="Autor" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group" style="display: none; visibility: hidden;">
+                        <label asp-for="Email" class="control-label">Email</label>
+                        <input asp-for="Email" class="form-control" value="Email" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="BrojTelefona" class="control-label"></label>
+                        <input asp-for="BrojTelefona" class="form-control" />
+                        <span asp-validation-for="BrojTelefona" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Datum" class="control-label"></label>
+                        <input asp-for="Datum" class="form-control" />
+                        <span asp-validation-for="Datum" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Vrijeme" class="control-label"></label>
+                        <input asp-for="Vrijeme" class="form-control" />
+                        <span asp-validation-for="Vrijeme" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                
+                        <label asp-for="TipAnalizeID" class="control-label">Vrsta analize</label>
+                        <select asp-for="TipAnalizeID" class="form-control" asp-items="ViewBag.TipAnalizeID">
+                            <option>---Izaberi analizu---</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="LaboratorijaID" class="control-label">Laboratorija</label>
+                        <select asp-for="LaboratorijaID" class="form-control" asp-items="ViewBag.LaboratorijaID">
+                            <option>---Izaberi laboratoriju---</option>
+                        </select>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <input type="submit" value="Potvrdi" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+        @if (User.IsInRole("Laborant") || User.IsInRole("Administrator"))
+        {
+            <div style="text-align:center;font-size:35px;">
+                <a asp-action="Index" style="font-family:cursive;color:black;">Pogledaj sve rezervacije</a>
+            </div>
+        }
+    </div>
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
+

@@ -1,0 +1,99 @@
+﻿@model IEnumerable<diplomskirad.Models.Parametar>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+
+
+<div class="container" style="margin-top:20px">
+    <div class="row" style="background-color:pink">
+        <div class="col-6 col-sm-3">
+            @Html.DisplayNameFor(model => model.Nalaz.Imeiprezime):  @ViewBag.ime<br />
+            @Html.DisplayNameFor(model => model.Nalaz.Email): @ViewBag.email<br />
+            @Html.DisplayNameFor(model => model.Nalaz.Brojtelefona): @ViewBag.brojtel<br />
+            @* @Html.DisplayNameFor(model => model.Nalaz.Datum): @ViewBag.datum<br />*@
+            Datum i vrijeme: @ViewBag.vrijeme
+        </div>
+
+
+
+    </div>
+
+
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            @*
+                <th>
+                    @Html.DisplayNameFor(model => model.Nalaz.Opis)
+                </th>
+            *@
+            <th>
+                @Html.DisplayNameFor(model => model.Sifarnik.Naziv)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sifarnik.Jedinica)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sifarnik.Min) ref.vrijednost
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sifarnik.Max) ref.vrijednost
+            </th>
+            <th>
+                Izracunata vrijednost
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                @*   <td>
+                        @Html.DisplayFor(modelItem => item.Nalaz.Opis)
+                    </td>
+                *@
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sifarnik.Naziv)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sifarnik.Jedinica)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sifarnik.Min)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sifarnik.Max)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Vrijednost)
+                </td>
+
+
+
+                @if (User.IsInRole("Laborant") || User.IsInRole("Administrator"))
+                {
+                    <td>
+                        <a asp-action="Edit" style="font-family:cursive" asp-route-id="@item.ParametarID">Izmijeni</a> |
+                        <a asp-action="Details" style="font-family:cursive" asp-route-id="@item.ParametarID">Detalji</a> |
+                        <a asp-action="Delete" style="font-family:cursive" asp-route-id="@item.ParametarID">Obrisi</a>
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
+
+
+

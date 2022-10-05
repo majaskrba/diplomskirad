@@ -16,7 +16,7 @@ namespace diplomskirad.Data.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.14")
+                .HasAnnotation("ProductVersion", "5.0.15")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -219,6 +219,38 @@ namespace diplomskirad.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("diplomskirad.Models.Analize", b =>
+                {
+                    b.Property<int>("AnalizeID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<float>("Cijena")
+                        .HasColumnType("real");
+
+                    b.Property<string>("Naziv")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Opis")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Slika")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TipAnalizeID")
+                        .HasColumnType("int");
+
+                    b.HasKey("AnalizeID");
+
+                    b.HasIndex("TipAnalizeID");
+
+                    b.ToTable("analize");
+                });
+
             modelBuilder.Entity("diplomskirad.Models.Informacija", b =>
                 {
                     b.Property<int>("InformacijaID")
@@ -287,6 +319,218 @@ namespace diplomskirad.Data.Migrations
                     b.ToTable("komentar");
                 });
 
+            modelBuilder.Entity("diplomskirad.Models.Laboratorija", b =>
+                {
+                    b.Property<int>("LaboratorijaID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Lokacija")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Naziv")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("LaboratorijaID");
+
+                    b.ToTable("laboratorija");
+                });
+
+            modelBuilder.Entity("diplomskirad.Models.Nalaz", b =>
+                {
+                    b.Property<int>("NalazID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Autor")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Brojtelefona")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Datum")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Imeiprezime")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Opis")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Vrijeme")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("NalazID");
+
+                    b.ToTable("nalaz");
+                });
+
+            modelBuilder.Entity("diplomskirad.Models.Parametar", b =>
+                {
+                    b.Property<int>("ParametarID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("NalazID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SifarnikID")
+                        .HasColumnType("int");
+
+                    b.Property<float>("Vrijednost")
+                        .HasColumnType("real");
+
+                    b.HasKey("ParametarID");
+
+                    b.HasIndex("NalazID");
+
+                    b.HasIndex("SifarnikID");
+
+                    b.ToTable("parametar");
+                });
+
+            modelBuilder.Entity("diplomskirad.Models.Rezervacija", b =>
+                {
+                    b.Property<int>("RezervacijaID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Autor")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("BrojTelefona")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Datum")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("LaboratorijaID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TipAnalizeID")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Vrijeme")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("RezervacijaID");
+
+                    b.HasIndex("LaboratorijaID");
+
+                    b.HasIndex("TipAnalizeID");
+
+                    b.ToTable("rezervacija");
+                });
+
+            modelBuilder.Entity("diplomskirad.Models.RolesViewModel", b =>
+                {
+                    b.Property<string>("UlogeID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("Selektovano")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UlogeIme")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UlogeID");
+
+                    b.ToTable("RolesViewModel");
+                });
+
+            modelBuilder.Entity("diplomskirad.Models.Sifarnik", b =>
+                {
+                    b.Property<int>("SifarnikID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Jedinica")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("Max")
+                        .HasColumnType("real");
+
+                    b.Property<float>("Min")
+                        .HasColumnType("real");
+
+                    b.Property<string>("Naziv")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("SifarnikID");
+
+                    b.ToTable("sifarnik");
+                });
+
+            modelBuilder.Entity("diplomskirad.Models.TipAnalize", b =>
+                {
+                    b.Property<int>("TipAnalizeID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Naziv")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Opis")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Slika")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("TipAnalizeID");
+
+                    b.ToTable("tipanalize");
+                });
+
+            modelBuilder.Entity("diplomskirad.Models.UserRoles", b =>
+                {
+                    b.Property<string>("KorisnickiID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("BrojTelefona")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("KorisnickoIme")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("KorisnickiID");
+
+                    b.ToTable("User");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -338,6 +582,17 @@ namespace diplomskirad.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("diplomskirad.Models.Analize", b =>
+                {
+                    b.HasOne("diplomskirad.Models.TipAnalize", "TipAnalize")
+                        .WithMany("Analiza")
+                        .HasForeignKey("TipAnalizeID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("TipAnalize");
+                });
+
             modelBuilder.Entity("diplomskirad.Models.Komentar", b =>
                 {
                     b.HasOne("diplomskirad.Models.Informacija", "Informacija")
@@ -349,9 +604,64 @@ namespace diplomskirad.Data.Migrations
                     b.Navigation("Informacija");
                 });
 
+            modelBuilder.Entity("diplomskirad.Models.Parametar", b =>
+                {
+                    b.HasOne("diplomskirad.Models.Nalaz", "Nalaz")
+                        .WithMany("Parametar")
+                        .HasForeignKey("NalazID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("diplomskirad.Models.Sifarnik", "Sifarnik")
+                        .WithMany()
+                        .HasForeignKey("SifarnikID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Nalaz");
+
+                    b.Navigation("Sifarnik");
+                });
+
+            modelBuilder.Entity("diplomskirad.Models.Rezervacija", b =>
+                {
+                    b.HasOne("diplomskirad.Models.Laboratorija", "Laboratorija")
+                        .WithMany("Rezervacija")
+                        .HasForeignKey("LaboratorijaID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("diplomskirad.Models.TipAnalize", "TipAnalize")
+                        .WithMany("Rezervacija")
+                        .HasForeignKey("TipAnalizeID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Laboratorija");
+
+                    b.Navigation("TipAnalize");
+                });
+
             modelBuilder.Entity("diplomskirad.Models.Informacija", b =>
                 {
                     b.Navigation("Komentar");
+                });
+
+            modelBuilder.Entity("diplomskirad.Models.Laboratorija", b =>
+                {
+                    b.Navigation("Rezervacija");
+                });
+
+            modelBuilder.Entity("diplomskirad.Models.Nalaz", b =>
+                {
+                    b.Navigation("Parametar");
+                });
+
+            modelBuilder.Entity("diplomskirad.Models.TipAnalize", b =>
+                {
+                    b.Navigation("Analiza");
+
+                    b.Navigation("Rezervacija");
                 });
 #pragma warning restore 612, 618
         }

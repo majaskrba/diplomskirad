@@ -1,0 +1,91 @@
+﻿@model IEnumerable<diplomskirad.Models.Nalaz>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if (User.Identity.Name == "Administrator" && User.Identity.Name == ("Laborant"))
+{
+    <p>
+        <a asp-action="Create" style="font-family:cursive">Kreiraj Nalaz</a>
+    </p>
+
+}
+
+<p style="font-size: 25px; font-family: cursive">Moji nalazi:</p>
+    <table class="table">
+        <thead>
+            <tr>
+                <td>
+                    <strong>
+                        @Html.DisplayNameFor(model => model.Opis)
+                    </strong>
+                </td>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Imeiprezime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Datum)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Vrijeme)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Brojtelefona)
+                </th>
+                <td>
+                    <strong>
+                        Laborant
+                    </strong>
+                </td>
+                <th></th>
+            </tr>
+        </thead>
+
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Opis)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Imeiprezime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Datum)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Vrijeme)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Brojtelefona)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Autor)
+                    </td>
+
+                    <td>
+                        <a asp-area="" asp-controller="Parametars" asp-action="Index2" asp-route-id="@item.NalazID"> Pogledaj nalaz</a>
+                        @if (User.Identity.Name == "Administrator" && User.Identity.Name == ("Laborant"))
+                        {
+                            <a asp-action="Edit" style="font-family:cursive" asp-route-id="@item.NalazID">Izmijeni</a>
+                            <a asp-action="Details" style="font-family:cursive" asp-route-id="@item.NalazID">Detalji</a>
+                            <a asp-action="Delete" style="font-family:cursive" asp-route-id="@item.NalazID">Obrisi</a>
+                        }
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+
+    </table>

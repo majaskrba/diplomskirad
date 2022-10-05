@@ -1,0 +1,81 @@
+﻿@model IEnumerable<diplomskirad.Models.Analize>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .card {
+        border: 1px solid #ccc;
+        background-color: lightgreen;
+        padding: 50px;
+        margin-bottom: 10px;
+        margin-top: 10px;
+        margin-right: 10px;
+        margin-left: 10px;
+        position: relative;
+        height: 30rem;
+        width: 18rem;
+    }
+
+
+    #detalji {
+        font-size: 20px;
+        color: black;
+    }
+</style>
+@if (User.IsInRole("Laborant") || User.IsInRole("Administraotr"))
+{
+
+    <a type="button" style="font-family: cursive; margin-top: 10px; margin-left: 25px" class="btn btn-primary" asp-area="" asp-action="Create">Kreiraj Analizu</a>
+
+}
+<div class="container d-flex flex-wrap">
+    @foreach (var item in Model)
+    {
+
+        <div class="card">
+            <img class="card-img-top" src="~/Images/droplet-half.svg" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">@item.Naziv</h5>
+
+                <p style="font-family:cursive">CIJENA @Html.DisplayFor(modelItem => item.Cijena)</p>  <a asp-action="Details" asp-route-id="@item.AnalizeID" style="font-family:cursive">Detalji</a>
+                <br />
+                @if (User.IsInRole("Administrator") || User.IsInRole("Laborant"))
+                {
+                    <a asp-action="Edit" asp-route-id="@item.AnalizeID" style="font-family: cursive">Izmijeni</a>
+
+                    <a asp-action="Delete" asp-route-id="@item.AnalizeID" style="font-family: cursive">Obrisi</a>
+                }
+            </div>
+        </div>
+
+        @*
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Special title treatment</h5>
+                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+        @*
+            <div class="card" style="width: 18rem;">
+
+                <div class="card-body">
+                    <h5 class="card-title">@item.Naziv</h5>
+
+                     <a asp-action="Edit" asp-route-id="@item.AnalizeID">Izmijeni</a> |
+                    <a asp-action="Details" asp-route-id="@item.AnalizeID">Detalji</a> |
+                    <a asp-action="Delete" asp-route-id="@item.AnalizeID">Obrisi</a>
+                </div>
+            </div>*@
+
+
+    }
+
+</div>

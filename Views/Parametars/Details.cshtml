@@ -1,0 +1,37 @@
+﻿@model diplomskirad.Models.Parametar
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Detalji o Parametru</h1>
+
+<div>
+    
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Vrijednost)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Vrijednost)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Nalaz)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Nalaz.Autor)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Sifarnik)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Sifarnik.Jedinica)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit"  style="font-family:cursive" asp-route-id="@Model.ParametarID">Izmijeni</a> |
+    <a asp-action="Index">Vrati se  </a>
+</div>

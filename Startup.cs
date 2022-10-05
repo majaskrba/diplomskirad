@@ -30,11 +30,16 @@ namespace diplomskirad
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDatabaseDeveloperPageExceptionFilter();
+             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
+            services.Configure<IdentityOptions>(
+               option =>
+               option.SignIn.RequireConfirmedEmail = true
+               );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

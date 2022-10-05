@@ -1,7 +1,23 @@
-﻿<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+﻿<style>
+    #button1 {
+      font-family:cursive;
+      font-size:20px;
+      margin-bottom:0px;
+    }
+    #navbar{
+
+        font-size:20px;
+        font-family:cursive;
+    }
+
+</style>
+
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="navbar" >
     <div class="container">
-        <a class="navbar-brand mt-0 mt-lg-0" href="#">
-            <img src="~/Images/images (1).jpg" alt="" width="45" height="35">
+        <a class="navbar-brand mt-0 mt-lg-0 " href="#">
+            <img class="mx-auto rounded-circle" src="~/Images/slikazakartice.PNG" alt="" width="45" height="35">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                 aria-expanded="false" aria-label="Toggle navigation">
@@ -13,47 +29,102 @@
 
                 <li class="nav-item">
 
-                    <a class="navbar-brand text-dark" asp-area="" asp-controller="Home" asp-action="Index">Laboratorija</a>
+                    <a class="nav-link text-dark " asp-area="" asp-controller="Home" asp-action="Index">M-Lab</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">O nama</a>
+                    <a class="nav-link text-dark " asp-area="" asp-controller="Home" asp-action="Index">O nama</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-dark" asp-area="" asp-controller="Informacijas" asp-action="Index">Informacije</a>
                 </li>
                 <li class="nav-item dropdown">
 
-                    <button type="button" class="btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <button type="button" id="button1" class="btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                         Analize
                     </button>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Mikrobiologija</a>
-                        <a class="dropdown-item" href="#">Genetika</a>
-                        <a class="dropdown-item" href="#">Biohemija</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Separated link</a>
+                        <a class="dropdown-item nav-link text-dark" asp-area="" asp-controller="TipAnalizes" asp-action="Index1" asp-route-id=1>Mikrobiologija</a>
+                        <a class="dropdown-item nav-link text-dark" asp-area="" asp-controller="TipAnalizes" asp-action="Index1" asp-route-id=2>Biohemija</a>
+                        <a class="dropdown-item nav-link text-dark" asp-area="" asp-controller="TipAnalizes" asp-action="Index1" asp-route-id=3>Genetika</a>
+
+                        
                     </div>
 
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Cjenovnik</a>
-                </li>
-               
-                <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Galerija</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Analizes" asp-action="GetList">Cjenovnik</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Moji nalazi</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Pacijenti</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Zaposleni</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Laboratorijas" asp-action="Index">Laboratorije</a>
                 </li>
 
+                @if (User.IsInRole("Pacijent"))
+                {
+
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Nalazs" asp-action="Index">Moji nalazi</a>
+                    </li>
+                }
+                @if (User.IsInRole("Laborant") || User.IsInRole("Administrator"))
+                {
+
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Nalazs" asp-action="Index1">Nalazi</a>
+                    </li>
+                }
+                @* <li class="nav-item dropdown">
+
+            <button type="button" id="button1" class="btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="font-weight:bold">
+                Korisnici
+            </button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item nav-link text-dark" asp-area="" asp-controller="TipAnalizes" asp-action="Index" asp-route-id=1>Zaposleni</a>
+                <a class="dropdown-item nav-link text-dark" asp-area="" asp-controller="TipAnalizes" asp-action="Index" asp-route-id=2>Pacijenti</a>
+
+
+
+
+            </div>
+
+        </li>
+                *@
+
+                @if (User.IsInRole("Administrator") || User.IsInRole("Laborant"))
+                {
+                    <li class="nav-item dropdown">
+                        <button type="button" id="button1" class="btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            Uloge
+                        </button>
+                        <div class="dropdown-menu">
+
+                            @if (User.IsInRole("Administrator"))
+                            {
+
+                                <a class="dropdown-item" asp-controller="Users" asp-action="GetLaborant">Laboranti</a>
+                                <a class="dropdown-item" asp-controller="Users" asp-action="GetUsers">Pacijenti</a>
+
+                                // <div class="dropdown-divider"></div>
+                                //<a class="dropdown-item" asp-controller="Home" asp-action="Panel">Panel</a>
+
+                            }
+                            @if (User.IsInRole("Laborant"))
+                            {
+                                <a class="dropdown-item" asp-controller="Users" asp-action="GetUsers">Pacijenti</a>
+
+
+                            }
+
+
+
+
+
+                        </div>
+                    </li>
+
+                }
             </ul>
             <partial name="_LoginPartial" />
+           
         </div>
     </div>
    

@@ -1,0 +1,45 @@
+﻿@model IEnumerable<diplomskirad.Models.Analize>
+
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TipAnalize)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Naziv)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Cijena)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.TipAnalize
+                </td>
+                <td>
+                    @item.Naziv
+                </td>
+
+
+                <td>
+                    @item.Cijena
+                </td>
+
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.AnalizeID" style="font-family: cursive">Izmijeni</a>
+                    <a asp-action="Details" asp-route-id="@item.AnalizeID" style="font-family: cursive">Detalji</a>
+                    <a asp-action="Delete" asp-route-id="@item.AnalizeID" style="font-family: cursive">Obrisi</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

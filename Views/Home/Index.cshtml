@@ -1,25 +1,71 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+<style>
+    body {
+        background-color: whitesmoke;
+    }
+
+    .container {
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
+    #rezervacija {
+        width: 450px;
+        height: 70px;
+        font-size: 32px;
+        text-align: center;
+        margin-left: 30%;
+        font-family: cursive;
+    }
+    #a {
+        margin-left:20px;
+        margin-right:20px;
+        font-family:cursive;
+        font-size:20px;
+    }
+
+</style>
 
 
+<div class="container">
 
-<div class="row">  
-    <div class="col-md-6">
+    <img src="~/Images/eda16f99-32e0-4203-8751-29c85e18b885-laboratorija.jpg" class="rounded" alt="Laboratorija" width="100%" height="auto">
+    <div style="background-color:white">
+
+             <br />
+       <b id="a" > M-Lab</b> <p class="text-muted" id="a">
+                Laboratorija M Lab osnovana je 2018 godine sa ciljem da obezbijedi kvalitetnu, profesionalnu i nadasve pouzdanu laboratorijsku diagnostiku. Naša zajednička želja je da uspostavimo dobru, kvalitetnu komunikaciju sa pacijentima i korektne, profesionalne odnose sa ljekarima i svim drugim korisnicima. Naš moto – pouzdani rezultati i efikasnost, zasniva se na primjeni svjetskih standarda iz oblasti laboratorijske dijagnostike. U toku cijelog dana u našoj laboratoriji pružamo Vam usluge vađenja krvi i uzimanje ostalih uzoraka, a naša patronažna služba može doći i kod vas po pozivu.
+            </p>  <br />
+           
+       <b id="a">Zašto HBL Lab</b>
+        <br />
+        <p class="text-muted" id="a">
+            Najsavremenija tehnologija, iskusni stručnjaci
+            M-lab laboratorija raspolaže ispitnom opremom najsavremenije tehnologije i zapošljava iskusne i profesionalne stručnjake koji za fokus u procesu rada imaju postizanje preciznih i pouzdanih rezultata u domenu laboratorijske dijagnostike.
+        </p><br />
+
+        <b id="a">Kvalitet i efikasnost</b>
+        <br />
+        <p class="text-muted" id="a">
+            Kvalitet i efikasnost su naši osnovni postulati, oni jesu i uvijek će biti ključ našeg uspjeha i čine nas pouzdanim i kompetentnim partnerom ljekarima, medicinskim osoblju, bolnicama, ordinacijama, osiguravajućim društvima, firmama kao i pojedincima.
+        </p> <br />
+
+      <b id="a">Ljubazan i profesionalan odnos prema korisnicima</b>
+        <br />
+        <p class="text-muted"  id="a">
+            Saradnju sa korisnicima karakterišu bliski profesionalni odnosi, aktivna komunikacija i mogućnost stručnih konsultacija iz bilo koje oblasti laboratorijske prakse. HBL-lab laboratorije za svoj osnovni cilj imaju dobrobit pacijenata, što se primarno manifestuje kroz pouzdanost ispitivanja koje obavljamo, brzinu izdavanja rezultata, prijatan ambijent u kojem pacijenti borave, kao i ljubaznost u pristupu svakom korisniku.
+        </p><br />
+
+      <b id="a">Vrhunska zdravstvena usluga</b><br />
+        <p class="text-muted" id="a">
+            Dežurna M-lab laboratorija radi tokom cijele sedmice, vikendom i praznicima, a patronažne ekipe na poziv dolaze na naznačenu adresu i vrše prikupljanje uzoraka ili dostavu rezultata. Korisnici zdravstvenih usluga mogu biti sigurni da će u M-lab laboratoriji dobiti precizno utvrđene i blagovremene rezultate laboratorijskih analiza, tumačenje rezultata, kao i stručni savjet o izboru ciljanih analiza.
+        </p><br />
+
+        <a  class="btn btn-outline-secondary" id="rezervacija" asp-area="" asp-controller="Rezervacijas" asp-action="Create">Rezervisi svoj termin</a>
 
     </div>
- 
-    <div class="col-md-6"></div>
-    <script>
-        var map;
-        function initMap()
-        {
-            map = new google.maps.Map(document.getElementById('map'),
-                {
-                    center: { lat: -34.397, lng: 150.664 },
-                    zoom: 8
-                });
+    </div>
 
-        }
-    </script>
-</div>
+
+

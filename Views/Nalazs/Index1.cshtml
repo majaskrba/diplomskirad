@@ -1,0 +1,116 @@
+﻿@model IEnumerable<diplomskirad.Models.Nalaz>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (!ViewData.ModelState.IsValid && ViewData.ModelState["Error"].Errors.Count > 0)
+{
+    <div class="alert alert-danger" role="alert" style="margin-top:4rem;">
+        Nije pronadjena nijedna osoba sa unijetim emailom!
+    </div>
+    <script>
+        window.setTimeout(function () {
+            $(".alert").fadeTo(500, 0).slideUp(1000, function () {
+                $(this).remove();
+            });
+        }, 2000);
+    </script>
+
+}
+
+<form asp-controller="Nalazs" asp-action="Pretraga1">
+    <p style="font-family: cursive">
+        Email:<input type="text" class="form-control" name="SearchString" placeholder="Unesi email osobe" />
+        <input type="submit" class="btn btn-primary" style="font-family:cursive" value="Pretrazi" />
+    </p>
+</form>
+<p style="font-size: 25px; font-family: cursive">
+    Spisak svih nalaza
+</p>
+<table class="table table-hover table-striped">
+    <thead>
+        <tr>
+            <td>
+                <strong>
+                    @Html.DisplayNameFor(model => model.Opis)
+                </strong>
+            </td>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Imeiprezime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Datum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vrijeme)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Brojtelefona)
+            </th>
+            <td>
+                <strong>
+                    Laborant
+                </strong>
+            </td>
+            <th></th>
+        </tr>
+    </thead>
+
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Opis)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Imeiprezime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Datum)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Vrijeme)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Brojtelefona)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Autor)
+                </td>
+
+                <td>
+                    <a asp-area="" asp-controller="Parametars" asp-action="Index1" asp-route-id="@item.NalazID"> Pogledaj nalaz</a>
+
+                    <a asp-action="Edit" style="font-family:cursive" asp-route-id="@item.NalazID">Izmijeni</a>
+                    <a asp-action="Details" style="font-family:cursive" asp-route-id="@item.NalazID">Detalji</a>
+                    <a asp-action="Delete" style="font-family:cursive" asp-route-id="@item.NalazID">Obrisi</a>
+
+                </td>
+
+            </tr>
+        }
+    </tbody>
+
+</table>
+@if (User.IsInRole("Laborant") || User.IsInRole("Administrator"))
+{
+    <p>
+        <a asp-action="Create" style="font-family:cursive">Kreiraj Nalaz</a>
+
+        <a asp-area="" asp-controller="Sifarniks" asp-action="Create" style="font-family:cursive">Kreiraj Parametar</a>
+
+        <a asp-area="" asp-controller="Parametars" asp-action="Create" style="font-family:cursive">Dodijeli parametre nalazu</a>
+    </p>
+}

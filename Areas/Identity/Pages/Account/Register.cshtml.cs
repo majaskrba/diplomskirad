@@ -21,16 +21,19 @@ namespace diplomskirad.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
+            RoleManager<IdentityRole> roleManager,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender)
         {
             _userManager = userManager;
+            _roleManager = roleManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
@@ -45,12 +48,12 @@ namespace diplomskirad.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = "Polje Email je obavezno")]
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Polje Lozinka je obavezno")]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
@@ -58,7 +61,7 @@ namespace diplomskirad.Areas.Identity.Pages.Account
 
             [DataType(DataType.Password)]
             [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Compare("Password", ErrorMessage = "Lozinke nisu identicne")]
             public string ConfirmPassword { get; set; }
         }
 
@@ -76,6 +79,10 @@ namespace diplomskirad.Areas.Identity.Pages.Account
             {
                 var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
                 var result = await _userManager.CreateAsync(user, Input.Password);
+    //kreiranje rola         //   var role1 = await _roleManager.CreateAsync(new IdentityRole(Constants.Role.Administrator.ToString()));
+               // var role2 = await _roleManager.CreateAsync(new IdentityRole(Constants.Role.Laborant.ToString()));
+              //  var role3 = await _roleManager.CreateAsync(new IdentityRole(Constants.Role.Pacijent.ToString()));
+                await _userManager.AddToRoleAsync(user, Constants.Role.Pacijent.ToString());
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
@@ -88,7 +95,7 @@ namespace diplomskirad.Areas.Identity.Pages.Account
                         values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
+                    await _emailSender.SendEmailAsync(Input.Email, "Potvrdite Vas email",
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)

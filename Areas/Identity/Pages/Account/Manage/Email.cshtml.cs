@@ -108,7 +108,7 @@ namespace diplomskirad.Areas.Identity.Pages.Account.Manage
                 return RedirectToPage();
             }
 
-            StatusMessage = "Your email is unchanged.";
+            StatusMessage = "Vasa email nije promijenjena.";
             return RedirectToPage();
         }
 

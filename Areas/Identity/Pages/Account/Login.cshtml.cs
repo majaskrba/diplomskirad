@@ -42,15 +42,15 @@ namespace diplomskirad.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = "Polje Email je obavezno")]
             [EmailAddress]
             public string Email { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Polje Lozinka je obavezno")]
             [DataType(DataType.Password)]
             public string Password { get; set; }
 
-            [Display(Name = "Remember me?")]
+            [Display(Name = "Zapamti podatke?")]
             public bool RememberMe { get; set; }
         }
 
@@ -98,7 +98,7 @@ namespace diplomskirad.Areas.Identity.Pages.Account
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, "Neispravna lozinka.");
                     return Page();
                 }
             }

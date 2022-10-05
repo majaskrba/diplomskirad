@@ -1,0 +1,40 @@
+﻿@model diplomskirad.Models.Parametar
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<h1>Da li ste sigurni da zelite obrisati Parametar?</h1>
+<div>
+    <h4>Parametar</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Vrijednost)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Vrijednost)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Nalaz)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Nalaz.Autor)
+        </dd class>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Sifarnik)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Sifarnik.Jedinica)
+        </dd class>
+    </dl>
+    
+    <form asp-action="Delete"  style="font-family:cursive">
+        <input type="hidden" asp-for="ParametarID" />
+        <input type="submit" value="Obrisi" class="btn btn-danger" /> |
+        <a asp-action="Index"  style="font-family:cursive">Vrati se  </a>
+    </form>
+</div>

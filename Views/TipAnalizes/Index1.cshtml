@@ -1,0 +1,83 @@
+﻿@model diplomskirad.Models.TipAnalize
+
+<style>
+    #naslov {
+        font-size: 38px;
+        font-weight: bold;
+        text-align: left;
+        background-color: white;
+        margin-top:10px;
+        margin-bottom:10px;
+    }
+
+    #opis {
+        font-size: 20px;
+    }
+
+    body {
+        background-color: whitesmoke;
+    }
+</style>
+<div class="container">
+    <div style="background-color:white">
+        @* <h4>TipAnalize</h4>
+        <hr />*@
+
+        @*<dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Naziv)
+        </dt>
+        *@
+
+        <div>
+            @*
+            @if (Model.TipAnalizeID == 1)
+            {
+                <img src="~/Images/mikrobiologija.jpg" style="width:100%"  class="rounded"/>
+            }
+            else if (Model.TipAnalizeID == 2)
+            {
+                <img src="~/Images/bioheeemija1.jpg" style="width:100%"  class="rounded" />
+            }
+            else if (Model.TipAnalizeID == 3)
+            {
+                <img src="~/Images/geenetika.webp" style="width:100%"  class="rounded" />
+            }*@
+            <img src="~/Images/@Model.Slika" style="width:100%" class="rounded" />
+
+        </div>
+        <div id="naslov">
+
+            @Html.DisplayFor(model => model.Naziv)
+        </div>
+
+
+        @*
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Opis)
+        </dt>
+        *@
+        <div id="opis">
+            @Html.DisplayFor(model => model.Opis)
+        </div>
+        <br />
+        <a asp-area="" style="font-family:cursive" class="btn btn-primary" asp-controller="Analizes" asp-action="Index" asp-route-id="@Model.TipAnalizeID">Pogledaj spispak analiza koje pripadaju @Model.Naziv</a>
+
+        @*
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Slika)
+        </dt> *@
+        @if (User.IsInRole("Administrator") || User.IsInRole("Laborant"))
+        {
+            <a asp-action="Create1" style="font-family: cursive" >Kreiraj</a>
+
+            <a asp-action="Edit" style="font-family: cursive" asp-route-id="@Model.TipAnalizeID">Izmijeni</a>
+            <a asp-action="Index" style="font-family: cursive">Vrati se</a>
+        }
+    </div>
+    <div>
+    </div>
+</div>
+
+
+

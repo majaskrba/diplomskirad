@@ -1,0 +1,33 @@
+﻿@model List<RolesViewModel>
+@{
+    ViewData["Title"] = "Upravljanje";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<form method="post">
+    <div class="card">
+        <div class="card-header">
+            <h2>Upravljajte korisnickim ulogama</h2>
+           Dodaj/Ukloni ulogu za korisnika / @ViewBag.UserName.
+        </div>
+        <div class="card-body">
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                <div class="form-check m-1">
+                    <input type="hidden" asp-for="@Model[i].UlogeID" />
+                    <input type="hidden" asp-for="@Model[i].UlogeIme" />
+                    <input asp-for="@Model[i].Selektovano" class="form-check-input" />
+                    <label class="form-check-label" asp-for="@Model[i].Selektovano">
+                        @Model[i].UlogeIme
+                    </label>
+                </div>
+            }
+            <div asp-validation-summary="All" class="text-danger"></div>
+        </div>
+        <div class="card-footer">
+            <input type="submit" value="Promijeni" class="btn btn-primary"
+                   style="width:auto" />
+           
+        </div>
+    </div>
+</form>
+

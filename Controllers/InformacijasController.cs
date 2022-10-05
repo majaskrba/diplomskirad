@@ -7,9 +7,10 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using diplomskirad.Data;
 using diplomskirad.Models;
-using diplomskirad.ViewModels;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
+using diplomskirad.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace diplomskirad.Controllers
 {
@@ -75,7 +76,9 @@ namespace diplomskirad.Controllers
             }
             return View(informacija);
         }
+        [Authorize]
         [HttpPost]
+   /**/    
         public IActionResult Create1(InformacijaViewModels model)
         {
             string stringFileName = UploadFile(model);
